@@ -1,0 +1,15 @@
+FROM python:3.8
+ 
+WORKDIR /app
+ 
+COPY requirements.txt /app
+ 
+RUN pip3 install -r requirements.txt
+RUN apt update
+RUN apt install -y --no-install-recommends libjemalloc2 libgl1 python3-poppler-qt5 poppler-utils
+
+RUN apt install poppler-data
+RUN apt install fonts-arphic-ukai fonts-arphic-uming fonts-ipafont-mincho fonts-ipafont-gothic fonts-unfonts-core
+
+ENV LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so.2
+
